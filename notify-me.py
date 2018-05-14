@@ -8,6 +8,14 @@ def Notify(heading, message, minutes = 0):
 	time.sleep (seconds)
 	sub.call(["notify-send", args.heading, args.message])
 
+def AltNotification():
+	from PyQt5 import Qt
+	import sys
+	app = Qt.QApplication(sys.argv)
+	systemtray_icon = Qt.QSystemTrayIcon(app)
+	systemtray_icon.show()
+	systemtray_icon.showMessage('Title', 'Content')
+
 def ParserInit ():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("heading", help = "Heading of the notification", type = str)
