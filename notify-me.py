@@ -21,11 +21,16 @@ def ParserInit ():
 	parser.add_argument("heading", help = "Heading of the notification", type = str)
 	parser.add_argument("message", help = "Message body of the notification", type = str)
 	parser.add_argument("minutes", help = "Notify after how many minutes", type = float)
+	parser.add_argument("-a", "--alternate", help = "Use if you wnat to use PyQt notification", action = "store_true")
 	args = parser.parse_args()
 
 	return args
 
 if __name__ == "__main__":
 	args = ParserInit()
-	Thread = threading.Thread(target = Notify, args = (args.heading, args.message, args.minutes, ))
-	Thread.start()
+	if args.alternate:
+		AltNotification()
+
+	else:
+		Thread = threading.Thread(target = Notify, args = (args.heading, args.message, args.minutes, ))
+		Thread.start()
