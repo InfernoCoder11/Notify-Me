@@ -8,13 +8,15 @@ def Notify(heading, message, minutes = 0):
 	time.sleep (seconds)
 	sub.call(["notify-send", args.heading, args.message])
 
-def AltNotification():
+def AltNotification(heading, message, minutes = 0):
 	from PyQt5 import Qt
 	import sys
+	seconds = minutes*60
 	app = Qt.QApplication(sys.argv)
 	systemtray_icon = Qt.QSystemTrayIcon(app)
 	systemtray_icon.show()
-	systemtray_icon.showMessage('Title', 'Content')
+	time.sleep(seconds)
+	systemtray_icon.showMessage(heading, message)
 
 def ParserInit ():
 	parser = argparse.ArgumentParser()
@@ -29,7 +31,7 @@ def ParserInit ():
 if __name__ == "__main__":
 	args = ParserInit()
 	if args.alternate:
-		AltNotification()
+		AltNotification(args.heading, args.message, args.minutes, )
 
 	else:
 		Thread = threading.Thread(target = Notify, args = (args.heading, args.message, args.minutes, ))
