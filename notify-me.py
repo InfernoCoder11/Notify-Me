@@ -3,15 +3,23 @@ import argparse
 import time
 import threading
 
-def Notify(heading, message, minutes = 0):
-	seconds = minutes*60
+def Notify(heading, message, minutes):
+	try:
+		seconds = args.minutes*60
+	except TypeError:
+		seconds = default*60
+	
 	time.sleep (seconds)
 	sub.call(["notify-send", args.heading, args.message])
 
-def AltNotification(heading, message, minutes = 0):
+def AltNotification(heading, message, minutes):
 	from PyQt5 import Qt
 	import sys
-	seconds = minutes*60
+	try:
+		seconds = args.minutes*60
+	except TypeError:
+		seconds = default*60
+				
 	app = Qt.QApplication(sys.argv)
 	systemtray_icon = Qt.QSystemTrayIcon(app)
 	systemtray_icon.show()
@@ -22,7 +30,7 @@ def ParserInit ():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("heading", help = "Heading of the notification", type = str)
 	parser.add_argument("message", help = "Message body of the notification", type = str)
-	parser.add_argument("minutes", help = "Notify after how many minutes", type = float)
+	parser.add_argument("-m", "--minutes", help = "Notify after how many minutes", type = float)
 	parser.add_argument("-a", "--alternate", help = "Use if you wnat to use PyQt notification", action = "store_true")
 	args = parser.parse_args()
 
@@ -30,8 +38,9 @@ def ParserInit ():
 
 if __name__ == "__main__":
 	args = ParserInit()
+	default = 0.1
 	if args.alternate:
-		AltNotification(args.heading, args.message, args.minutes, )
+		AltNotification(args.heading, args.message, args.minutes)
 
 	else:
 		Thread = threading.Thread(target = Notify, args = (args.heading, args.message, args.minutes, ))
