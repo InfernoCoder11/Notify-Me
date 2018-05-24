@@ -1,7 +1,7 @@
 # Notify-Me
 
-Simple program to make timed notifications using `notify-send` on Linux.
-`notify-send` comes pre-installed on Ubuntu. To install on other distros, type `sudo apt-get install notify-osd` in terminal and hit enter.
+Simple program to make timed notifications using `notify-send` on Linux and PyQt5 on Windows.
+`notify-send` comes pre-installed on Ubuntu. To install on other linux distros, type `sudo apt-get install notify-osd` in terminal and hit enter.
 
 ## Usage:-
 - `python3 notify-me.py <heading> <message> <minutes> [-a]`
