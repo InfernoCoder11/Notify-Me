@@ -38,7 +38,7 @@ def ParserInit ():
 
 if __name__ == "__main__":
 	args = ParserInit()
-	default = 0.1
+	default = 60
 	if args.alternate:
 		AltNotification(args.heading, args.message, args.minutes)
 
