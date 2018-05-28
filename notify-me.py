@@ -2,6 +2,7 @@ import subprocess as sub
 import argparse
 import time
 import threading
+import sys
 
 def Notify(heading, message, minutes):
 	try:
@@ -39,6 +40,10 @@ def ParserInit ():
 if __name__ == "__main__":
 	args = ParserInit()
 	default = 60
+
+	if sys.platform in "win32 cygwin":
+		args.alternate = True
+
 	if args.alternate:
 		AltNotification(args.heading, args.message, args.minutes)
 
